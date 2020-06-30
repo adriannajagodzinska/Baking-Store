@@ -1,0 +1,101 @@
+﻿@model OIprojekt.Models.Recipe
+    <style>
+        #tabela {
+            background-color: rgba(249, 242, 236,.7);
+        }
+        #tlo {
+            background-color: rgba(249, 242, 236,.7);
+        }
+        #nazwa {
+            transform: translateY(30%);
+            transform: translateX(2%)
+        }
+    </style>
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Szczegóły</h3>
+
+<div id="tlo">
+    <h1 id="nazwa"> @Html.DisplayFor(model => model.RecipeName)</h1>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.RecipeName)
+            Nazwa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecipeName)
+        </dd>*@
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Sources)*@
+            Źródło
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sources)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Preparation)*@
+            Przygotowanie
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Preparation)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Date)*@
+            Data dodania
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Calories)*@
+            Wartość kaloryczna
+        </dt>
+
+        <dd>
+           @Html.DisplayFor(model => model.Calories)
+            
+        </dd>
+        <dt>
+            @*@Html.DisplayFor(model => model.Quantities)*@
+            Składniki
+        </dt>
+        <dd>
+            <table class="table" id="tabela">
+                <tr>
+                    @*<th>Składniki</th>*@
+                </tr>
+                @foreach (var item in Model.Quantities)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.Ingredient.IngredientName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IngredientQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Measurement.MeasurementName)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.RecipeID }) |
+    @Html.ActionLink("Powrót do listy przepisów", "Index")
+</p>

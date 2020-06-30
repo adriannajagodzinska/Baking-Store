@@ -1,0 +1,53 @@
+﻿@model OIprojekt.Models.Ingredient
+<style>
+    #tlo {
+        background-color: rgba(249, 242, 236,.7);
+    }
+    #usun {
+        color: firebrick;
+    }
+    #button {
+        background-color:firebrick;
+    }
+</style>
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuń</h2>
+
+<h3 id="usun">Czy na pewno chcesz usunąć produkt?</h3>
+<div id="tlo">
+   @* <h4>Produkt</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           @* @Html.DisplayNameFor(model => model.IngredientName)*@
+            Nazwa produktu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IngredientName)
+        </dd>
+
+        <dt>
+           @* @Html.DisplayNameFor(model => model.CaloriesQuantity)*@
+            Wartość kaloryczna
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CaloriesQuantity)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" id="button" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy produktów", "Index")
+        </div>
+    }
+</div>

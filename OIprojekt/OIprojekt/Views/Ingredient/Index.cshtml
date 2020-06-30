@@ -1,0 +1,76 @@
+﻿@model IEnumerable<OIprojekt.Models.Ingredient>
+<style>
+    #tabelka {
+        background-color: rgb(248, 242, 237);
+    }
+</style>
+@{
+    ViewBag.Title = "Produkty";
+}
+
+<h2>Produkty</h2>
+
+<p>
+    @Html.ActionLink("Dodaj nowy produkt", "Create")
+</p>
+<br />
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" />
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-hover" id="tabelka">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.IngredientName)*@
+            @Html.ActionLink("Nazwa składnika", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.CaloriesQuantity)*@
+            @Html.ActionLink("Wartość kaloryczna w 100g/1szt", "Index", new { sortOrder = ViewBag.CalorieSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="Search">
+            <td>
+                @Html.DisplayFor(modelItem => item.IngredientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaloriesQuantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.IngredientID }) |
+                @* @Html.ActionLink("Szczegóły", "Details", new { id=item.IngredientID })*@
+                @Html.ActionLink("Usuń", "Delete", new { id = item.IngredientID })
+            </td>
+        </tr>
+    }
+
+</table>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>

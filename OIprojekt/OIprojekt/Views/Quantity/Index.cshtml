@@ -1,0 +1,94 @@
+﻿@model IEnumerable<OIprojekt.Models.Quantity>
+<style>
+    #tabelka {
+        background-color: rgb(248, 242, 237);
+    }
+</style>
+@{
+    ViewBag.Title = "Składniki";
+}
+
+<h2>Składniki</h2>
+
+<p>
+    @Html.ActionLink("Dodaj nowy składnik", "Create")
+</p>
+
+<div class="container">
+    <div class="form-group">
+        <div class="input-group" id="szuk">
+
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" />
+
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-hover" id="tabelka">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Ingredient.IngredientName)*@
+            @Html.ActionLink("Nazwa składnika", "Index", new { sortOrder = ViewBag.CalorieSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Measurement.MeasurementName)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Recipe.RecipeName)*@
+            @Html.ActionLink("Nazwa przepisu", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.IngredientQuantity)*@
+            @Html.ActionLink("Ilość", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="Search">
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredient.IngredientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Measurement.MeasurementName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Recipe.RecipeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngredientQuantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.QuantityID }) |
+                @* @Html.ActionLink("Szczgóły", "Details", new { id=item.QuantityID }) |*@
+                @Html.ActionLink("Usuń", "Delete", new { id = item.QuantityID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<script src="~/Scripts/jquery-3.3.1.slim.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,62 @@
+﻿@model OIprojekt.Models.Quantity
+<style>
+    #tlo {
+        background-color: rgba(249, 242, 236,.7);
+    }
+    #nazwa {
+            transform: translateY(30%);
+            transform: translateX(2%)
+        }
+</style>
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Szczegóły</h3>
+
+<div id="tlo">
+    <h1 id="nazwa"> @Html.DisplayFor(model => model.Ingredient.IngredientName)</h1>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+             @Html.DisplayNameFor(model => model.Ingredient.IngredientName)
+            Nazwa składnika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredient.IngredientName)
+        </dd>*@
+
+        <dt>
+            @* @Html.DisplayNameFor(model => model.Measurement.MeasurementName)*@
+            Miara
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Measurement.MeasurementName)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Recipe.RecipeName)*@
+            Nazwa przepisu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recipe.RecipeName)
+        </dd>
+
+        <dt>
+            @* @Html.DisplayNameFor(model => model.IngredientQuantity)*@
+            Ilość
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IngredientQuantity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuantityID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

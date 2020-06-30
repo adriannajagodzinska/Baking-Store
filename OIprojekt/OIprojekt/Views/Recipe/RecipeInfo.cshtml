@@ -1,0 +1,17 @@
+﻿@model IEnumerable<OIprojekt.Models.Recipe>
+@{
+    ViewBag.Title = "RecipeInfo";
+}
+<div class="container">
+    <h4 style="text-align:center; border-bottom:1px solid #808080">Info</h4>
+    @foreach (var item in Model)
+    {
+<p><label>Nazwa: </label> @item.RecipeName</p>
+<p><label>Przygotowanie: </label> @item.Preparation</p> 
+   @* <label>Składniki: </label> @item.Quantities*@
+       
+
+    }
+</div>
+
+    

@@ -1,0 +1,71 @@
+﻿@model OIprojekt.Models.Quantity
+<style>
+    #tlo {
+        background-color: rgba(249, 242, 236,.7);
+    }
+        #usun {
+        color: firebrick;
+    }
+    #button {
+        background-color:firebrick;
+    }
+</style>
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuń składnik</h2>
+
+<h3 id="usun">Czy na pewno chcesz usunąć składnik?</h3>
+<div id="tlo">
+  @*  <h4>Składniki</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Ingredient.IngredientName)*@
+            Nazwa składnika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredient.IngredientName)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Measurement.MeasurementName)*@
+            Miara
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Measurement.MeasurementName)
+        </dd>
+
+        <dt>
+            @* @Html.DisplayNameFor(model => model.Recipe.RecipeName)*@
+            Nazwa przepisu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recipe.RecipeName)
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.IngredientQuantity)*@
+            Ilość składnika
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IngredientQuantity)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" id="button" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy składników", "Index")
+        </div>
+    }
+</div>

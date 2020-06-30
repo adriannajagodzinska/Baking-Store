@@ -1,0 +1,155 @@
+﻿@model IEnumerable<OIprojekt.Models.Recipe>
+@*@model PagedList.IPagedList<OIprojekt.Models.Recipe>
+    @using PagedList.Mvc;
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />*@
+<style>
+    #tabelka {
+        background-color: rgb(248, 242, 237);
+    }
+    #dodaj {
+        font-weight: bolder;
+    }
+</style>
+
+
+@{
+    ViewBag.Title = "Przepisy";
+}
+
+<h2>Przepisy</h2>
+
+<p id="dodaj">
+    @Html.ActionLink("Dodaj nowy przepis", "Create")
+</p>
+@*@using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }*@
+
+@*<br />*@
+<br />
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i> </span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" />
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-hover" id="tabelka">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.RecipeName)*@
+            @Html.ActionLink("Nazwa przepisu", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Sources)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.Preparation)
+            </th>*@
+        <th>
+            @* @Html.DisplayNameFor(model => model.Quantities)*@
+
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Date)*@
+            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.Calories)*@
+            @Html.ActionLink("Wartość kaloryczna", "Index", new { sortOrder = ViewBag.CalorieSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="Search">
+            <td>
+                @*<a href="=#" data-toggle="popover" data-trigger="hover" id="@item.RecipeID">
+                    @item.RecipeName*@
+                     @Html.DisplayFor(modelItem => item.RecipeName)
+                @*</a>*@
+
+
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Sources)
+                </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Preparation)
+                </td>*@
+            <td>
+                <div>
+                    <input type="button" value="Dodaj składnik" onclick="@("window.location.href='" + @Url.Action("Create","Quantity") + "'");" />
+
+                </div>
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Calories)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.RecipeID }) |
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.RecipeID }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.RecipeID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@*<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            title: setData,
+            html: true,
+            placement: 'right'
+        });
+        function setData(id) {
+            var set_data = '';
+            var element = $(this);
+            var id = element.attr("id");
+            $.ajax({
+                url: "/Recipe/Index/RecipeInfo?id" + id,
+                method: "post",
+                async: false,
+                data: { id: id },
+                succes: function (data) {
+                    set_data = data;
+                }
+            });
+            return set_data;
+        }
+    });*@
+</script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLocaleLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
